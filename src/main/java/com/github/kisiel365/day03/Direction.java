@@ -1,25 +1,19 @@
 package com.github.kisiel365.day03;
 
-public enum Direction {
-	EAST(1, 0), NORTH(0, 1), WEST(-1, 0), SOUTH(0, -1);
+enum Direction {
+	EAST(new Modifier(1, 0)), NORTH(new Modifier(0, 1)), WEST(new Modifier(-1, 0)), SOUTH(new Modifier(0, -1));
 
-	private int x;
-	private int y;
+	private Modifier modifier;
 
-	Direction(int x, int y) {
-		this.x = x;
-		this.y = y;
+	Direction(Modifier modifier) {
+		this.modifier = modifier;
 	}
 
-	public int getX() {
-		return x;
+	Modifier getModifier() {
+		return modifier;
 	}
 
-	public int getY() {
-		return y;
-	}
-
-	public Direction getNextDirection() {
+	Direction getNextDirection() {
 		if (this == Direction.EAST)
 			return Direction.NORTH;
 		else if (this == Direction.NORTH)

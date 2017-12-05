@@ -1,115 +1,103 @@
 package com.github.kisiel365.day03;
 
-import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableSet;
 
 public final class Day03 {
+
+	private static final Set<Modifier> NEIGHBOUR_MODIFIERS = createNeighbourModifiers();
 
 	private Day03() {
 	}
 
-	public static int spiralManhattanDistance(int i) {
-		Map<Position, Integer> spiral = generateSpiral(i);
-		Position position = spiral.entrySet().stream().filter(x -> x.getValue().equals(i)).map(x -> x.getKey())
-				.findFirst().orElse(null);
-		return position.manhattanDistance();
+	public static int spiralManhattanDistance(int targetValue) {
+		return traverseSpiral(targetValue).manhattanDistance();
 	}
 
-	public static int spiralManhattanNeighbourSumValueExceeding(int i) {
-		Map<Position, Integer> generateSpiral2 = generateSummingSpiral(i);
-		return generateSpiral2.values().stream().max(Comparator.naturalOrder()).orElse(null);
+	public static int spiralManhattanNeighbourSumValueExceeding(int targetValue) {
+		return traverseSummingSpiral(targetValue);
 	}
 
-	private static Map<Position, Integer> generateSpiral(long value) {
-		Map<Position, Integer> map = new HashMap<>();
-		map.put(new Position(0, 0), 1);
-		int currentX = 0;
-		int currentY = 0;
+	private static Position traverseSpiral(long targetValue) {
+		Position latestPosition = new Position(0, 0);
 		Direction direction = Direction.EAST;
-		boolean keepGoing = true;
-		int sideLength = 1;
 		int currentValue = 1;
+		int targetSideLength = 1;
+		int currentSideLength = 0;
+		boolean targetSideLengthReached = false;
+		boolean keepGoing = targetValue == 1 ? false : true;
 		while (keepGoing) {
-			for (int i = 0; i < sideLength; i++) {
-				currentValue++;
-				currentX += direction.getX();
-				currentY += direction.getY();
-				Position position = new Position(currentX, currentY);
-				map.put(position, currentValue);
-				if (currentValue >= value) {
-					keepGoing = false;
-					break;
+			latestPosition = latestPosition.go(direction);
+			currentValue++;
+			currentSideLength++;
+			if (currentSideLength == targetSideLength) {
+				direction = direction.getNextDirection();
+				if (targetSideLengthReached) {
+					targetSideLengthReached = false;
+					targetSideLength++;
+				} else {
+					targetSideLengthReached = true;
 				}
+				currentSideLength = 0;
 			}
-			if (keepGoing) {
-				direction = direction.getNextDirection();
-				for (int i = 0; i < sideLength; i++) {
-					currentValue++;
-					currentX += direction.getX();
-					currentY += direction.getY();
-					Position position = new Position(currentX, currentY);
-					map.put(position, currentValue);
-					if (currentValue >= value) {
-						keepGoing = false;
-						break;
-					}
-				}
-				direction = direction.getNextDirection();
-				sideLength++;
+			if (currentValue >= targetValue) {
+				keepGoing = false;
 			}
 		}
-		return map;
+		return latestPosition;
 	}
 
-	private static Map<Position, Integer> generateSummingSpiral(long value) {
+	private static Integer traverseSummingSpiral(long targetValue) {
 		Map<Position, Integer> map = new HashMap<>();
-		map.put(new Position(0, 0), 1);
-		int currentX = 0;
-		int currentY = 0;
+		Position latestPosition = new Position(0, 0);
+		map.put(latestPosition, 1);
+		boolean keepGoing = targetValue == 1 ? false : true;
 		Direction direction = Direction.EAST;
-		boolean keepGoing = true;
-		int sideLength = 1;
+		int targetSideLength = 1;
+		int currentSideLength = 0;
+		boolean targetSideLengthReached = false;
 		int currentValue = 1;
 		while (keepGoing) {
-			for (int i = 0; i < sideLength; i++) {
-				currentX += direction.getX();
-				currentY += direction.getY();
-				currentValue = sumAlreadyCalculatedNeighbours(currentX, currentY, map);
-				map.put(new Position(currentX, currentY), currentValue);
-				if (currentValue >= value) {
-					keepGoing = false;
-					break;
+			latestPosition = latestPosition.go(direction);
+			currentValue = sumAlreadyCalculatedNeighbours(latestPosition, map);
+			map.put(latestPosition, currentValue);
+			currentSideLength++;
+			if (currentSideLength == targetSideLength) {
+				direction = direction.getNextDirection();
+				if (targetSideLengthReached) {
+					targetSideLengthReached = false;
+					targetSideLength++;
+				} else {
+					targetSideLengthReached = true;
 				}
+				currentSideLength = 0;
 			}
-			if (keepGoing) {
-				direction = direction.getNextDirection();
-				for (int i = 0; i < sideLength; i++) {
-					currentX += direction.getX();
-					currentY += direction.getY();
-					currentValue = sumAlreadyCalculatedNeighbours(currentX, currentY, map);
-					map.put(new Position(currentX, currentY), currentValue);
-					if (currentValue >= value) {
-						keepGoing = false;
-						break;
-					}
-				}
-				direction = direction.getNextDirection();
-				sideLength++;
+			if (currentValue >= targetValue) {
+				keepGoing = false;
 			}
 		}
-		return map;
+		return currentValue;
 	}
 
-	private static int sumAlreadyCalculatedNeighbours(int currentX, int currentY, Map<Position, Integer> map) {
-		Integer num1 = map.getOrDefault(new Position(currentX + 1, currentY + 1), 0);
-		Integer num2 = map.getOrDefault(new Position(currentX + 1, currentY), 0);
-		Integer num3 = map.getOrDefault(new Position(currentX + 1, currentY - 1), 0);
-		Integer num4 = map.getOrDefault(new Position(currentX - 1, currentY + 1), 0);
-		Integer num5 = map.getOrDefault(new Position(currentX - 1, currentY), 0);
-		Integer num6 = map.getOrDefault(new Position(currentX - 1, currentY - 1), 0);
-		Integer num7 = map.getOrDefault(new Position(currentX, currentY + 1), 0);
-		Integer num8 = map.getOrDefault(new Position(currentX, currentY - 1), 0);
-		return num1 + num2 + num3 + num4 + num5 + num6 + num7 + num8;
+	private static int sumAlreadyCalculatedNeighbours(Position latestPosition, Map<Position, Integer> map) {
+		int value = 0;
+		for (Modifier modifier : NEIGHBOUR_MODIFIERS)
+			value += map.getOrDefault(new Position(latestPosition.getX() + modifier.getDeltaX(),
+					latestPosition.getY() + modifier.getDeltaY()), 0);
+		return value;
+	}
+
+	private static Set<Modifier> createNeighbourModifiers() {
+		ImmutableSet<Integer> range = ImmutableSet.of(1, 0, -1);
+		Set<Modifier> modifiers = new HashSet<>();
+		for (Integer i : range)
+			for (Integer j : range)
+				modifiers.add(new Modifier(i, j));
+		modifiers.remove(new Modifier(0, 0));
+		return modifiers;
 	}
 }

@@ -1,6 +1,6 @@
 package com.github.kisiel365.day03;
 
-public class Position {
+final class Position {
 	private final int x;
 	private final int y;
 
@@ -9,11 +9,11 @@ public class Position {
 		this.y = y;
 	}
 
-	public int getX() {
+	int getX() {
 		return x;
 	}
 
-	public int getY() {
+	int getY() {
 		return y;
 	}
 
@@ -42,7 +42,20 @@ public class Position {
 		return true;
 	}
 
-	public int manhattanDistance() {
+	Position go(Modifier modifier) {
+		return new Position(x + modifier.getDeltaX(), y + modifier.getDeltaY());
+	}
+
+	Position go(Direction direction) {
+		return go(direction.getModifier());
+	}
+
+	@Override
+	public String toString() {
+		return "[" + x + "," + y + "]";
+	}
+
+	int manhattanDistance() {
 		return (x > 0 ? x : -x) + (y > 0 ? y : -y);
 	}
 }
