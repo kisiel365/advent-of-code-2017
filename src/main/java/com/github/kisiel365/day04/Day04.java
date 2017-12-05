@@ -2,7 +2,10 @@ package com.github.kisiel365.day04;
 
 import java.util.Arrays;
 
-public class Day04 {
+public final class Day04 {
+
+	private Day04() {
+	}
 
 	public static boolean containsNoDuplicates(String line) {
 		String[] words = line.split(" ");

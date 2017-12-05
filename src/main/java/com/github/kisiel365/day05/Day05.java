@@ -1,6 +1,9 @@
 package com.github.kisiel365.day05;
 
-public class Day05 {
+public final class Day05 {
+
+	private Day05() {
+	}
 
 	public static int countJumps(String simpleCaseInput) {
 		String[] split = simpleCaseInput.split("\r\n");

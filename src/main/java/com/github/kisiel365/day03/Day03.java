@@ -4,7 +4,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Day03 {
+public final class Day03 {
+
+	private Day03() {
+	}
 
 	public static int spiralManhattanDistance(int i) {
 		Map<Position, Integer> spiral = generateSpiral(i);
