@@ -17,11 +17,8 @@ public final class Day03 {
 		private boolean targetSideLengthReached = false;
 		private Direction direction = Direction.EAST;
 
-		Direction getDirection() {
-			return direction;
-		}
-
-		void step() {
+		Position traverse(Position currentPosition) {
+			Position nextPosition = currentPosition.go(direction);
 			currentSideLength++;
 			if (currentSideLength == targetSideLength) {
 				direction = direction.getNextDirection();
@@ -33,8 +30,8 @@ public final class Day03 {
 				}
 				currentSideLength = 0;
 			}
+			return nextPosition;
 		}
-
 	}
 
 	private Day03() {
@@ -49,33 +46,31 @@ public final class Day03 {
 	}
 
 	private static Position traverseSpiral(long targetValue) {
-		Position latestPosition = new Position(0, 0);
+		Position currentPosition = new Position(0, 0);
 		int currentValue = 1;
 		SpiralTraverser spiralTraverser = new SpiralTraverser();
 		boolean keepGoing = targetValue == 1 ? false : true;
 		while (keepGoing) {
-			latestPosition = latestPosition.go(spiralTraverser.getDirection());
+			currentPosition = spiralTraverser.traverse(currentPosition);
 			currentValue++;
-			spiralTraverser.step();
 			if (currentValue >= targetValue) {
 				keepGoing = false;
 			}
 		}
-		return latestPosition;
+		return currentPosition;
 	}
 
 	private static Integer traverseSummingSpiral(long targetValue) {
 		Map<Position, Integer> map = new HashMap<>();
-		Position latestPosition = new Position(0, 0);
-		map.put(latestPosition, 1);
+		Position currentPosition = new Position(0, 0);
+		map.put(currentPosition, 1);
 		SpiralTraverser spiralTraverser = new SpiralTraverser();
 		boolean keepGoing = targetValue == 1 ? false : true;
 		int currentValue = 1;
 		while (keepGoing) {
-			latestPosition = latestPosition.go(spiralTraverser.getDirection());
-			currentValue = sumAlreadyCalculatedNeighbours(latestPosition, map);
-			map.put(latestPosition, currentValue);
-			spiralTraverser.step();
+			currentPosition = spiralTraverser.traverse(currentPosition);
+			currentValue = sumAlreadyCalculatedNeighbours(currentPosition, map);
+			map.put(currentPosition, currentValue);
 			if (currentValue >= targetValue) {
 				keepGoing = false;
 			}
