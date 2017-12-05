@@ -1,11 +1,10 @@
 package com.github.kisiel365.day03;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import com.google.common.collect.ImmutableSet;
 
 public final class Day03 {
 
@@ -38,14 +37,6 @@ public final class Day03 {
 	}
 
 	public static int spiralManhattanDistance(int targetValue) {
-		return traverseSpiral(targetValue).manhattanDistance();
-	}
-
-	public static int spiralManhattanNeighbourSumValueExceeding(int targetValue) {
-		return traverseSummingSpiral(targetValue);
-	}
-
-	private static Position traverseSpiral(long targetValue) {
 		Position currentPosition = new Position(0, 0);
 		int currentValue = 1;
 		SpiralTraverser spiralTraverser = new SpiralTraverser();
@@ -57,10 +48,10 @@ public final class Day03 {
 				keepGoing = false;
 			}
 		}
-		return currentPosition;
+		return currentPosition.manhattanDistance();
 	}
 
-	private static Integer traverseSummingSpiral(long targetValue) {
+	public static int spiralManhattanNeighbourSumValueExceeding(int targetValue) {
 		Map<Position, Integer> map = new HashMap<>();
 		Position currentPosition = new Position(0, 0);
 		map.put(currentPosition, 1);
@@ -87,7 +78,7 @@ public final class Day03 {
 	}
 
 	private static Set<Modifier> createNeighbourModifiers() {
-		ImmutableSet<Integer> range = ImmutableSet.of(1, 0, -1);
+		Set<Integer> range = new HashSet<>(Arrays.asList(1, 0, -1));
 		Set<Modifier> modifiers = new HashSet<>();
 		for (Integer i : range)
 			for (Integer j : range)
