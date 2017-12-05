@@ -11,6 +11,32 @@ public final class Day03 {
 
 	private static final Set<Modifier> NEIGHBOUR_MODIFIERS = createNeighbourModifiers();
 
+	private static class SpiralTraverser {
+		private int targetSideLength = 1;
+		private int currentSideLength = 0;
+		private boolean targetSideLengthReached = false;
+		private Direction direction = Direction.EAST;
+
+		Direction getDirection() {
+			return direction;
+		}
+
+		void step() {
+			currentSideLength++;
+			if (currentSideLength == targetSideLength) {
+				direction = direction.getNextDirection();
+				if (targetSideLengthReached) {
+					targetSideLengthReached = false;
+					targetSideLength++;
+				} else {
+					targetSideLengthReached = true;
+				}
+				currentSideLength = 0;
+			}
+		}
+
+	}
+
 	private Day03() {
 	}
 
@@ -24,26 +50,13 @@ public final class Day03 {
 
 	private static Position traverseSpiral(long targetValue) {
 		Position latestPosition = new Position(0, 0);
-		Direction direction = Direction.EAST;
 		int currentValue = 1;
-		int targetSideLength = 1;
-		int currentSideLength = 0;
-		boolean targetSideLengthReached = false;
+		SpiralTraverser spiralTraverser = new SpiralTraverser();
 		boolean keepGoing = targetValue == 1 ? false : true;
 		while (keepGoing) {
-			latestPosition = latestPosition.go(direction);
+			latestPosition = latestPosition.go(spiralTraverser.getDirection());
 			currentValue++;
-			currentSideLength++;
-			if (currentSideLength == targetSideLength) {
-				direction = direction.getNextDirection();
-				if (targetSideLengthReached) {
-					targetSideLengthReached = false;
-					targetSideLength++;
-				} else {
-					targetSideLengthReached = true;
-				}
-				currentSideLength = 0;
-			}
+			spiralTraverser.step();
 			if (currentValue >= targetValue) {
 				keepGoing = false;
 			}
@@ -55,27 +68,14 @@ public final class Day03 {
 		Map<Position, Integer> map = new HashMap<>();
 		Position latestPosition = new Position(0, 0);
 		map.put(latestPosition, 1);
+		SpiralTraverser spiralTraverser = new SpiralTraverser();
 		boolean keepGoing = targetValue == 1 ? false : true;
-		Direction direction = Direction.EAST;
-		int targetSideLength = 1;
-		int currentSideLength = 0;
-		boolean targetSideLengthReached = false;
 		int currentValue = 1;
 		while (keepGoing) {
-			latestPosition = latestPosition.go(direction);
+			latestPosition = latestPosition.go(spiralTraverser.getDirection());
 			currentValue = sumAlreadyCalculatedNeighbours(latestPosition, map);
 			map.put(latestPosition, currentValue);
-			currentSideLength++;
-			if (currentSideLength == targetSideLength) {
-				direction = direction.getNextDirection();
-				if (targetSideLengthReached) {
-					targetSideLengthReached = false;
-					targetSideLength++;
-				} else {
-					targetSideLengthReached = true;
-				}
-				currentSideLength = 0;
-			}
+			spiralTraverser.step();
 			if (currentValue >= targetValue) {
 				keepGoing = false;
 			}
