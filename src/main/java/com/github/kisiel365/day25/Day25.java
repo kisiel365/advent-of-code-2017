@@ -5,4 +5,12 @@ public final class Day25 {
 	private Day25() {
 	}
 
+	public static int simple(String input) {
+		return 0;
+	}
+
+	public static int advanced(String input) {
+		return 0;
+	}
+
 }
