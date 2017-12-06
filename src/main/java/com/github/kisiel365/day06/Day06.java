@@ -36,10 +36,10 @@ public final class Day06 {
 	}
 
 	private static Integer[] parseInput(String input) {
-		String[] split = input.split("\t");
-		Integer[] banks = new Integer[split.length];
+		String[] elements = input.split("\t");
+		Integer[] banks = new Integer[elements.length];
 		for (int i = 0; i < banks.length; i++)
-			banks[i] = Integer.parseInt(split[i]);
+			banks[i] = Integer.parseInt(elements[i]);
 		return banks;
 	}
 
