@@ -11,72 +11,56 @@ public final class Day10 {
 	private Day10() {
 	}
 
-	public static int simple(int size, String input) {
-		int[] numbers = new int[size];
-		for (int i = 0; i < size; i++)
-			numbers[i] = i;
-		int currentPosition = 0;
-		int skipSize = 0;
+	public static int singleKnotHash(int size, String input) {
 		List<Integer> lengths = Arrays.stream(input.split(",")).map(Integer::parseInt).collect(Collectors.toList());
-		int timesMax = 1;
-		for (int times = 0; times < timesMax; times++)
-			for (int length : lengths) {
-				int reverseStart = currentPosition;
-				int reverseEnd = currentPosition + length - 1;
-				for (int i = 0; i < length / 2; i++) {
-					int tmp = numbers[(reverseStart + i + size) % size];
-					numbers[(reverseStart + i + size) % size] = numbers[(reverseEnd - i + size) % size];
-					numbers[(reverseEnd - i + size) % size] = tmp;
-				}
-				currentPosition += length + skipSize++;
-			}
-
-		return numbers[0] * numbers[1];
+		int[] sparseHash = getSparseHash(size, 1, lengths);
+		return sparseHash[0] * sparseHash[1];
 	}
 
-	public static int toByte(int number) {
-		int tmp = number & 0xff;
-		return (tmp & 0x80) == 0 ? tmp : tmp - 256;
-	}
-
-	public static int advanced(String rawInput) {
+	public static String produceHash(String rawInput) {
 		List<Integer> asciified = rawInput.chars().boxed().collect(Collectors.toList());
 		asciified.addAll(Arrays.asList(17, 31, 73, 47, 23));
-		System.out.println(asciified);
-		int size = 256;
-		int[] numbers = new int[size];
-		for (int i = 0; i < size; i++)
-			numbers[i] = i;
-		int currentPosition = 0;
-		int skipSize = 0;
-		int timesMax = 1;
-		for (int times = 0; times < timesMax; times++)
-			for (int length : asciified) {
-				int reverseStart = currentPosition;
-				int reverseEnd = currentPosition + length - 1;
-				for (int i = 0; i < length / 2; i++) {
-					int tmp = numbers[(reverseStart + i + size) % size];
-					numbers[(reverseStart + i + size) % size] = numbers[(reverseEnd - i + size) % size];
-					numbers[(reverseEnd - i + size) % size] = tmp;
-				}
-				currentPosition += length + skipSize++;
-			}
-		System.out.println(Arrays.toString(numbers));
+		int[] sparseHash = getSparseHash(256, 64, asciified);
+		byte[] xored = xorBlocks(sparseHash);
+		return DatatypeConverter.printHexBinary(xored).toLowerCase();
+	}
 
+	private static byte[] xorBlocks(int[] sparseHash) {
 		byte[] xored = new byte[16];
 		for (int block = 0; block < 16; block++) {
-			byte value = (byte) numbers[block * 16];
+			byte value = (byte) sparseHash[block * 16];
 			for (int numberInBlock = 1; numberInBlock < 16; numberInBlock++) {
-				value ^= numbers[block * 16 + numberInBlock];
+				value ^= sparseHash[block * 16 + numberInBlock];
 			}
 			xored[block] = value;
 		}
-		System.out.println(Arrays.toString(xored));
+		return xored;
+	}
 
-		String printHexBinary = DatatypeConverter.printHexBinary(xored);
-		System.out.println(printHexBinary);
+	private static int[] getSparseHash(int size, int times, List<Integer> lengths) {
+		int[] numbers = new int[size];
+		for (int i = 0; i < size; i++)
+			numbers[i] = i;
+		int currentPosition = 0;
+		int skipSize = 0;
+		for (int timesRun = 0; timesRun < times; timesRun++)
+			for (int length : lengths) {
+				reverse(numbers, currentPosition, length);
+				currentPosition += length + skipSize++;
+			}
+		return numbers;
+	}
 
-		return 0;
+	private static void reverse(int[] numbers, int currentPosition, int length) {
+		int reverseStart = currentPosition;
+		int reverseEnd = currentPosition + length - 1;
+		for (int i = 0; i < length / 2; i++) {
+			int position1 = (reverseStart + i + numbers.length) % numbers.length;
+			int position2 = (reverseEnd - i + numbers.length) % numbers.length;
+			int tmp = numbers[position1];
+			numbers[position1] = numbers[position2];
+			numbers[position2] = tmp;
+		}
 	}
 
 }
