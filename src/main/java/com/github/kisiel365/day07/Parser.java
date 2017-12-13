@@ -17,7 +17,7 @@ public class Parser {
 
 	static Map<String, Program> parseInput(String input) {
 		Map<String, Program> programs = new HashMap<>();
-		for (String line : input.split("\r\n")) {
+		for (String line : input.split(System.lineSeparator())) {
 			Program program = parseToProgram(line);
 			programs.put(program.getName(), program);
 		}

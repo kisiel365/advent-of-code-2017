@@ -42,7 +42,7 @@ public final class Day08 {
 	}
 
 	private static List<Command> parseInputToCommands(String input) {
-		String[] lines = input.split("\r\n");
+		String[] lines = input.split(System.lineSeparator());
 		List<Command> commands = new ArrayList<>();
 		for (String line : lines) {
 			Matcher matcher = PATTERN.matcher(line);

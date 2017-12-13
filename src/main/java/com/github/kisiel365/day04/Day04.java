@@ -33,11 +33,11 @@ public final class Day04 {
 	}
 
 	public static long countNoDuplicates(String input) {
-		return Arrays.stream(input.split("\r\n")).filter(Day04::containsNoDuplicates).count();
+		return Arrays.stream(input.split(System.lineSeparator())).filter(Day04::containsNoDuplicates).count();
 	}
 
 	public static long countNoDuplicatesNorAnagrams(String input) {
-		return Arrays.stream(input.split("\r\n")).filter(Day04::containsNoAnagrams).filter(Day04::containsNoDuplicates)
+		return Arrays.stream(input.split(System.lineSeparator())).filter(Day04::containsNoAnagrams).filter(Day04::containsNoDuplicates)
 				.count();
 	}
 

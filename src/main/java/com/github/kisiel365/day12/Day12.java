@@ -52,7 +52,7 @@ public final class Day12 {
 
 	private static Map<Integer, List<Integer>> parseInput(String input) {
 		Map<Integer, List<Integer>> graph = new HashMap<>();
-		for (String line : input.split("\r\n")) {
+		for (String line : input.split(System.lineSeparator())) {
 			Matcher matcher = PATTERN1.matcher(line);
 			matcher.find();
 			int node = Integer.parseInt(matcher.group(1));

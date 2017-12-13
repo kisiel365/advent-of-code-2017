@@ -24,7 +24,7 @@ public final class Day05 {
 	}
 
 	public static int countJumps(String simpleCaseInput, UnaryOperator<Integer> modifyOffset) {
-		String[] split = simpleCaseInput.split("\r\n");
+		String[] split = simpleCaseInput.split(System.lineSeparator());
 		Integer[] table = new Integer[split.length];
 		for (int i = 0; i < split.length; i++)
 			table[i] = Integer.parseInt(split[i]);

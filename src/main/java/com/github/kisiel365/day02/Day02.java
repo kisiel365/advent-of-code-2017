@@ -15,7 +15,7 @@ public final class Day02 {
 
 	public static long checksum(String input) {
 		long sum = 0;
-		String[] rows = input.split("\r\n");
+		String[] rows = input.split(System.lineSeparator());
 		for (String row : rows) {
 			List<Integer> elements = Arrays.stream(row.split("\t")).map(Integer::parseInt).collect(Collectors.toList());
 			Integer max = elements.stream().max(Comparator.naturalOrder()).orElse(null);
@@ -27,13 +27,13 @@ public final class Day02 {
 
 	public static long checksumEvenlyDivisible(String input) {
 		long sum = 0;
-		String[] rows = input.split("\r\n");
+		String[] rows = input.split(System.lineSeparator());
 		for (String row : rows) {
 			List<Integer> elements = Arrays.stream(row.split("\t")).map(Integer::parseInt).collect(Collectors.toList());
-			Integer quotient = elements.stream().map(element -> {
-				return elements.stream().filter(isEvenlyDivisibleBy(element)).map(divideBy(element)).findFirst()
-						.orElse(null);
-			}).filter(Objects::nonNull).findFirst().orElse(null);
+			Integer quotient = elements
+					.stream().map(element -> elements.stream().filter(isEvenlyDivisibleBy(element))
+							.map(divideBy(element)).findFirst().orElse(null))
+					.filter(Objects::nonNull).findFirst().orElse(null);
 			sum += quotient;
 		}
 		return sum;
