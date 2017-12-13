@@ -2,36 +2,32 @@ package com.github.kisiel365.day13;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import util.TestUtil;
 
 public class Day13Test {
 	private static final String CASE_INPUT = TestUtil.loadResourceAsString("day13/caseInput");
+	private static final String EXAMPLE_INPUT = TestUtil.loadResourceAsString("day13/exampleInput");
 
-	@Ignore
 	@Test
 	public void simpleExample() {
-		assertEquals(0, Day13.simple(""));
+		assertEquals(24, Day13.calculateSeverityOfImmediateRun(EXAMPLE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void simpleCase() {
-		assertEquals(0, Day13.simple(CASE_INPUT));
+		assertEquals(2164, Day13.calculateSeverityOfImmediateRun(CASE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void advancedExample() {
-		assertEquals(0, Day13.advanced(""));
+		assertEquals(10, Day13.delayNecessaryToOmitFirewall(EXAMPLE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void advancedCase() {
-		assertEquals(0, Day13.advanced(CASE_INPUT));
+		assertEquals(3861798, Day13.delayNecessaryToOmitFirewall(CASE_INPUT));
 	}
 
 }
