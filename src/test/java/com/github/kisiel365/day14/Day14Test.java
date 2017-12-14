@@ -2,36 +2,29 @@ package com.github.kisiel365.day14;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
-import util.TestUtil;
-
 public class Day14Test {
-	private static final String CASE_INPUT = TestUtil.loadResourceAsString("day14/caseInput");
 
-	@Ignore
 	@Test
 	public void simpleExample() {
-		assertEquals(0, Day14.simple(""));
+		assertEquals(8108, Day14.countPositiveBits("flqrgnkx"));
 	}
 
-	@Ignore
 	@Test
 	public void simpleCase() {
-		assertEquals(0, Day14.simple(CASE_INPUT));
+		assertEquals(8230, Day14.countPositiveBits("hfdlxzhv"));
 	}
 
-	@Ignore
+	
 	@Test
 	public void advancedExample() {
-		assertEquals(0, Day14.advanced(""));
+		assertEquals(1242, Day14.countPositiveBitGroups("flqrgnkx"));
 	}
 
-	@Ignore
 	@Test
 	public void advancedCase() {
-		assertEquals(0, Day14.advanced(CASE_INPUT));
+		assertEquals(1103, Day14.countPositiveBitGroups("hfdlxzhv"));
 	}
 
 }
