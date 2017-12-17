@@ -2,7 +2,6 @@ package com.github.kisiel365.day16;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import util.TestUtil;
@@ -10,28 +9,24 @@ import util.TestUtil;
 public class Day16Test {
 	private static final String CASE_INPUT = TestUtil.loadResourceAsString("day16/caseInput");
 
-	@Ignore
 	@Test
 	public void simpleExample() {
-		assertEquals(0, Day16.simple(""));
+		assertEquals("baedc", Day16.simple("abcde", "s1,x3/4,pe/b"));
 	}
 
-	@Ignore
 	@Test
 	public void simpleCase() {
-		assertEquals(0, Day16.simple(CASE_INPUT));
+		assertEquals("fgmobeaijhdpkcln", Day16.simple("abcdefghijklmnop", CASE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void advancedExample() {
-		assertEquals(0, Day16.advanced(""));
+		assertEquals("ceadb", Day16.advanced("abcde", "s1,x3/4,pe/b", 2));
 	}
 
-	@Ignore
 	@Test
 	public void advancedCase() {
-		assertEquals(0, Day16.advanced(CASE_INPUT));
+		assertEquals("lgmkacfjbopednhi", Day16.advanced("abcdefghijklmnop", CASE_INPUT, 1000000000));
 	}
 
 }
