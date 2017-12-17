@@ -11,22 +11,22 @@ public class Day16Test {
 
 	@Test
 	public void simpleExample() {
-		assertEquals("baedc", Day16.simple("abcde", "s1,x3/4,pe/b"));
+		assertEquals("baedc", Day16.orderAfterDancingOnce("abcde", "s1,x3/4,pe/b"));
 	}
 
 	@Test
 	public void simpleCase() {
-		assertEquals("fgmobeaijhdpkcln", Day16.simple("abcdefghijklmnop", CASE_INPUT));
+		assertEquals("fgmobeaijhdpkcln", Day16.orderAfterDancingOnce("abcdefghijklmnop", CASE_INPUT));
 	}
 
 	@Test
 	public void advancedExample() {
-		assertEquals("ceadb", Day16.advanced("abcde", "s1,x3/4,pe/b", 2));
+		assertEquals("ceadb", Day16.orderAfterDancingNTimes("abcde", "s1,x3/4,pe/b", 2));
 	}
 
 	@Test
 	public void advancedCase() {
-		assertEquals("lgmkacfjbopednhi", Day16.advanced("abcdefghijklmnop", CASE_INPUT, 1000000000));
+		assertEquals("lgmkacfjbopednhi", Day16.orderAfterDancingNTimes("abcdefghijklmnop", CASE_INPUT, 1000000000));
 	}
 
 }

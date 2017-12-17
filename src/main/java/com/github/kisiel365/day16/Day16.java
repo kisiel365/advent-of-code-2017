@@ -12,7 +12,7 @@ public final class Day16 {
 	private Day16() {
 	}
 
-	public static String simple(String startingState, String input) {
+	public static String orderAfterDancingOnce(String startingState, String input) {
 		char[] state = startingState.toCharArray();
 		List<Command> commands = Arrays.stream(input.split(",")).map(Day16::parseCommands).collect(Collectors.toList());
 		for (Command command : commands)
@@ -20,7 +20,7 @@ public final class Day16 {
 		return String.valueOf(state);
 	}
 
-	public static String advanced(String startingPositions, String input, int times) {
+	public static String orderAfterDancingNTimes(String startingPositions, String input, int times) {
 		char[] state = startingPositions.toCharArray();
 		List<Command> commands = Arrays.stream(input.split(",")).map(Day16::parseCommands).collect(Collectors.toList());
 		times = times % 24; // due to cycle detected

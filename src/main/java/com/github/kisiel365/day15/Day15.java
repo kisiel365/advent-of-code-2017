@@ -9,7 +9,7 @@ public final class Day15 {
 	private Day15() {
 	}
 
-	public static int simple(int generatorAStartingValue, int generatorBStartingValue) {
+	public static int matchingPairs(int generatorAStartingValue, int generatorBStartingValue) {
 		long genAvalue = generatorAStartingValue;
 		long genBvalue = generatorBStartingValue;
 		int ticks = 40000000;
@@ -31,7 +31,7 @@ public final class Day15 {
 		return (valueA & 0xFFFF) == (valueB & 0xFFFF);
 	}
 
-	public static int advanced(int generatorAStartingValue, int generatorBStartingValue) {
+	public static int matchingPairsAdvancedGenerators(int generatorAStartingValue, int generatorBStartingValue) {
 		long genAvalue = generatorAStartingValue;
 		long genBvalue = generatorBStartingValue;
 		int ticks = 5000000;

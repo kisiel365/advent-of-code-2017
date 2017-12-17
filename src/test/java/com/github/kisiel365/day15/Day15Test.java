@@ -10,12 +10,12 @@ public class Day15Test {
 
 	@Test
 	public void simpleExample() {
-		assertEquals(588, Day15.simple(65, 8921));
+		assertEquals(588, Day15.matchingPairs(65, 8921));
 	}
 
 	@Test
 	public void simpleCase() {
-		assertEquals(594, Day15.simple(703, 516));
+		assertEquals(594, Day15.matchingPairs(703, 516));
 	}
 
 	@Test
@@ -29,12 +29,12 @@ public class Day15Test {
 
 	@Test
 	public void advancedExample() {
-		assertEquals(309, Day15.advanced(65, 8921));
+		assertEquals(309, Day15.matchingPairsAdvancedGenerators(65, 8921));
 	}
 
 	@Test
 	public void advancedCase() {
-		assertEquals(328, Day15.advanced(703, 516));
+		assertEquals(328, Day15.matchingPairsAdvancedGenerators(703, 516));
 	}
 
 }
