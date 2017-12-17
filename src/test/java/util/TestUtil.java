@@ -1,21 +1,16 @@
 package util;
 
-import java.io.IOException;
-import java.net.URL;
-
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class TestUtil {
 	private TestUtil() {
 	}
 
 	public static String loadResourceAsString(String path) {
-		final URL url = Resources.getResource(path);
-		try {
-			return Resources.toString(url, Charsets.UTF_8);
-		} catch (IOException ex) {
-			return null;
+		InputStream inputStream = TestUtil.class.getClassLoader().getResourceAsStream(path);
+		try (Scanner scanner = new Scanner(inputStream, "UTF-8")) {
+			return scanner.useDelimiter("\\A").next();
 		}
 	}
 }
