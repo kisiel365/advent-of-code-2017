@@ -2,7 +2,6 @@ package com.github.kisiel365.day11;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import util.TestUtil;
@@ -10,28 +9,30 @@ import util.TestUtil;
 public class Day11Test {
 	private static final String CASE_INPUT = TestUtil.loadResourceAsString("day11/caseInput");
 
-	@Ignore
 	@Test
 	public void simpleExample() {
-		assertEquals(0, Day11.simple(""));
+		assertEquals(3, Day11.stepsAwayAtTheEnd("ne,ne,ne"));
+		assertEquals(0, Day11.stepsAwayAtTheEnd("ne,ne,sw,sw"));
+		assertEquals(2, Day11.stepsAwayAtTheEnd("ne,ne,s,s"));
+		assertEquals(3, Day11.stepsAwayAtTheEnd("se,sw,se,sw,sw"));
 	}
 
-	@Ignore
 	@Test
 	public void simpleCase() {
-		assertEquals(0, Day11.simple(CASE_INPUT));
+		assertEquals(834, Day11.stepsAwayAtTheEnd(CASE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void advancedExample() {
-		assertEquals(0, Day11.advanced(""));
+		assertEquals(3, Day11.stepsAwayEverReached("ne,ne,ne"));
+		assertEquals(2, Day11.stepsAwayEverReached("ne,ne,sw,sw"));
+		assertEquals(2, Day11.stepsAwayEverReached("ne,ne,s,s"));
+		assertEquals(3, Day11.stepsAwayEverReached("se,sw,se,sw,sw"));
 	}
 
-	@Ignore
 	@Test
 	public void advancedCase() {
-		assertEquals(0, Day11.advanced(CASE_INPUT));
+		assertEquals(1569, Day11.stepsAwayEverReached(CASE_INPUT));
 	}
 
 }
