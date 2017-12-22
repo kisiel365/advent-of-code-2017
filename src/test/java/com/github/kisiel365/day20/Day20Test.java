@@ -2,36 +2,33 @@ package com.github.kisiel365.day20;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import util.TestUtil;
 
 public class Day20Test {
 	private static final String CASE_INPUT = TestUtil.loadResourceAsString("day20/caseInput");
+	private static final String SIMPLE_EXAMPLE_INPUT = TestUtil.loadResourceAsString("day20/simpleExampleInput");
+	private static final String ADVANCED_EXAMPLE_INPUT = TestUtil.loadResourceAsString("day20/advancedExampleInput");
 
-	@Ignore
 	@Test
 	public void simpleExample() {
-		assertEquals(0, Day20.simple(""));
+		assertEquals(0, Day20.idOfParticleClosestToCenterInInfinity(SIMPLE_EXAMPLE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void simpleCase() {
-		assertEquals(0, Day20.simple(CASE_INPUT));
+		assertEquals(91, Day20.idOfParticleClosestToCenterInInfinity(CASE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void advancedExample() {
-		assertEquals(0, Day20.advanced(""));
+		assertEquals(1, Day20.countUncolidedParticles(ADVANCED_EXAMPLE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void advancedCase() {
-		assertEquals(0, Day20.advanced(CASE_INPUT));
+		assertEquals(567, Day20.countUncolidedParticles(CASE_INPUT));
 	}
 
 }
