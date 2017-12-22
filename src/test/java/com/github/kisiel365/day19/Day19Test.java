@@ -2,36 +2,32 @@ package com.github.kisiel365.day19;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import util.TestUtil;
 
 public class Day19Test {
 	private static final String CASE_INPUT = TestUtil.loadResourceAsString("day19/caseInput");
+	private static final String EXAMPLE_INPUT = TestUtil.loadResourceAsString("day19/exampleInput");
 
-	@Ignore
 	@Test
 	public void simpleExample() {
-		assertEquals(0, Day19.simple(""));
+		assertEquals("ABCDEF", Day19.simple(EXAMPLE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void simpleCase() {
-		assertEquals(0, Day19.simple(CASE_INPUT));
+		assertEquals("VEBTPXCHLI", Day19.simple(CASE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void advancedExample() {
-		assertEquals(0, Day19.advanced(""));
+		assertEquals(38, Day19.advanced(EXAMPLE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void advancedCase() {
-		assertEquals(0, Day19.advanced(CASE_INPUT));
+		assertEquals(18702, Day19.advanced(CASE_INPUT));
 	}
 
 }
