@@ -9,29 +9,21 @@ import util.TestUtil;
 
 public class Day24Test {
 	private static final String CASE_INPUT = TestUtil.loadResourceAsString("day24/caseInput");
+	private static final String EXAMPLE_INPUT = TestUtil.loadResourceAsString("day24/exampleInput");
 
-	@Ignore
 	@Test
 	public void simpleExample() {
-		assertEquals(0, Day24.simple(""));
+		assertEquals(31, Day24.strengthOfStrongestBridge(EXAMPLE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void simpleCase() {
-		assertEquals(0, Day24.simple(CASE_INPUT));
+		assertEquals(1906, Day24.strengthOfStrongestBridge(CASE_INPUT));
 	}
 
-	@Ignore
-	@Test
-	public void advancedExample() {
-		assertEquals(0, Day24.advanced(""));
-	}
-
-	@Ignore
 	@Test
 	public void advancedCase() {
-		assertEquals(0, Day24.advanced(CASE_INPUT));
+		assertEquals(1824, Day24.strengthOfLongestThenStrongestBridge(CASE_INPUT));
 	}
 
 }
