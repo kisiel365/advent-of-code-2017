@@ -14,14 +14,11 @@ public class InstructionsParser {
 	private List<InstructionParser> parsers;
 
 	public InstructionsParser(InstructionSet instructionSet) {
-		// if (InstructionSet.BASIC == instructionSet)
 		parsers = getSimpleParsers();
-		// else if (InstructionSet.ADVANCED == instructionSet)
-		// parsers = getAdvancedParsers();
 	}
 
 	public List<Instruction> parseInstructions(String input) {
-		return Arrays.stream(input.split("\n")).map(this::parseInstruction).collect(Collectors.toList());
+		return Arrays.stream(input.split("\r\n")).map(this::parseInstruction).collect(Collectors.toList());
 	}
 
 	private Instruction parseInstruction(String instructionString) {
@@ -33,13 +30,5 @@ public class InstructionsParser {
 		return Arrays.asList(new SubInstructionParser(), new SetInstructionParser(), new MulInstructionParser(),
 				new JnzInstructionParser());
 	}
-
-	// private static List<InstructionParser> getAdvancedParsers() {
-	// return Arrays.asList(new SendInstructionParser(), new
-	// ReceiveInstructionParser(), new SetInstructionParser(),
-	// new AddInstructionParser(), new MulInstructionParser(), new
-	// ModInstructionParser(),
-	// new JgzInstructionParser());
-	// }
 
 }

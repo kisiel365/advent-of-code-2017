@@ -170,7 +170,7 @@ public final class Day24 {
 
 	private static Set<Port> parseInput(String input) {
 		Set<Port> ports = new HashSet<>();
-		for (String line : input.split("\n")) {
+		for (String line : input.split("\r\n")) {
 			Matcher matcher = PATTERN.matcher(line);
 			if (matcher.matches()) {
 				ports.add(new Port(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2))));

@@ -2,7 +2,6 @@ package com.github.kisiel365.day24;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import util.TestUtil;
