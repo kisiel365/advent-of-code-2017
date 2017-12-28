@@ -9,17 +9,16 @@ import util.TestUtil;
 
 public class Day25Test {
 	private static final String CASE_INPUT = TestUtil.loadResourceAsString("day25/caseInput");
+	private static final String EXAMPLE_INPUT = TestUtil.loadResourceAsString("day25/exampleInput");
 
-	@Ignore
 	@Test
 	public void simpleExample() {
-		assertEquals(0, Day25.simple(""));
+		assertEquals(3, Day25.simple(EXAMPLE_INPUT));
 	}
 
-	@Ignore
 	@Test
 	public void simpleCase() {
-		assertEquals(0, Day25.simple(CASE_INPUT));
+		assertEquals(2870, Day25.simple(CASE_INPUT));
 	}
 
 	@Ignore
