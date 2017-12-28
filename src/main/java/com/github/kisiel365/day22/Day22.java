@@ -28,6 +28,7 @@ public final class Day22 {
 				break;
 			case FLAGGED:
 			case WEAKEND:
+			default:
 			}
 			position = position.makeStep(direction);
 		}
@@ -62,6 +63,7 @@ public final class Day22 {
 				map[position.getX()][position.getY()] = State.CLEAN;
 				direction = direction.directionToRight().directionToRight();
 				break;
+			default:
 			}
 			position = position.makeStep(direction);
 		}

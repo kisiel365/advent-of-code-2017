@@ -7,18 +7,14 @@ import java.util.stream.Collectors;
 
 public class InstructionsParser {
 
-	public enum InstructionSet {
-		BASIC, ADVANCED;
-	}
-
 	private List<InstructionParser> parsers;
 
-	public InstructionsParser(InstructionSet instructionSet) {
+	public InstructionsParser() {
 		parsers = getSimpleParsers();
 	}
 
 	public List<Instruction> parseInstructions(String input) {
-		return Arrays.stream(input.split("\r\n")).map(this::parseInstruction).collect(Collectors.toList());
+		return Arrays.stream(input.split("\n")).map(this::parseInstruction).collect(Collectors.toList());
 	}
 
 	private Instruction parseInstruction(String instructionString) {

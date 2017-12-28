@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public final class Day24 {
 
-	private final static Pattern PATTERN = Pattern.compile("([0-9]+)/([0-9]+)");
+	private static final Pattern PATTERN = Pattern.compile("([0-9]+)/([0-9]+)");
 
 	private Day24() {
 	}
@@ -99,6 +99,7 @@ public final class Day24 {
 				case REAR:
 					currentEnding = nextPort.portOne;
 					break;
+				default:
 				}
 				this.length++;
 				this.strength += nextPort.portOne + nextPort.portTwo;
